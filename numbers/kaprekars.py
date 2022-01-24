@@ -4,7 +4,7 @@ from typing import Sequence
 KAPREKAR_NUMBER = 6174
 
 
-def K(n: int):
+def K(n: int) -> int:
     if n < 1001: raise ValueError("the number cannot be less than 1 001")
     if n > 9999: raise ValueError("the number must be less than 10 000")
     if is_repdigit(n): raise ValueError("the number cannot be repdigit")
@@ -18,20 +18,20 @@ def K(n: int):
     return x
 
 
-def reverse(n: int):
+def reverse(n: int) -> int:
     if n < 0: raise ValueError("number must be non-negative")
     return lst_to_num(decompose(n))
 
 
-def lst_to_num(s: Sequence[int]):
+def lst_to_num(s: Sequence[int]) -> int:
     return sum(e * 10 ** (len(s) - i - 1) for i, e in enumerate(s))
 
 
-def is_repdigit(n: int):
-    return reduce(lambda x, y: x * (x == y), decompose(n))
+def is_repdigit(n: int) -> bool:
+    return bool(reduce(lambda x, y: x * (x == y), decompose(n)))
 
 
-def decompose(n: int):
+def decompose(n: int) -> list[int]:
     s = []
     
     while n:
